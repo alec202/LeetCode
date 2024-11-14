@@ -9,21 +9,26 @@ class Solution:
             encoded_string += f'{len(word)}_{word}'
         return encoded_string
         # we now have our encoded string
-    # Need to finish bug with decode
+
     def decode(self, s: str) -> List[str]:
         if s == "":
             return []
         list_of_word = []
         len_of_word = ""
-        index = 0
-        while s[index] != '_':
-            len_of_word += s[index]
-            index += 1
-        len_of_word = int(len_of_word)
         curr_word = ''
-        for i in range(1, len(s)):
+        for i in range(0, len(s)):
+            if isinstance(len_of_word, str):
+                if s[i] == "_":
+                    len_of_word = int(len_of_word)
+                    continue
+                    # we have the length of our word we're building as an int value
+                else:
+                    len_of_word += s[i]
+                    continue
+            # now we got the length of the word, we can solve the problem.
             if len_of_word <= 0:
-                len_of_word = int(s[i])
+                # at the curr index we have an integer.
+                len_of_word = s[i]
                 list_of_word.append(curr_word)
                 curr_word = ""
             else:
@@ -34,30 +39,16 @@ class Solution:
 
 # """
 # Encode function:
-# strs: ["neet","code","love","you"]
-# encoded string: '4neet4code4love3you'
+# strs: ["neet","code","love!@#$%^","you"]
+# encoded string: '4_neet4_code10_love!@#$%^3_you'
 # """
 
 # """
 # Decode Function:
-# string to decode: 4neet4code4love3you
+# string to decode: 4_neet4_code10_love!@#$%^3_you
 # list_of_word: [neet, ]
 # len_of_word: 4
-# curr_word: 'c'
-# i: 6
+# curr_word: ''
+# i: 1
 
 # """
-input = ["we","say",":","yes","!@#$%^&*()"]
-sol = Solution()
-encoded = sol.encode(input)
-print(encoded)
-decoded = sol.decode(encoded)
-print(decoded)
-
-
-
-
-
-
-
-
