@@ -1,15 +1,16 @@
 class Solution:
     def isPalindrome(self, s: str) -> bool:
-        phraseFixed = []
-        for c in s:
-            if c.isalnum():
-                phraseFixed.append(c.lower())
-        # we've built up our phrase array of only alpha numeric characters.
-        phrase = "".join(phraseFixed)
         left = 0
-        right = len(phrase) - 1
+        right = len(s) - 1
         while left < right:
-            if phrase[left] != phrase[right]:
+            if not s[left].isalnum():
+                left += 1
+                continue
+            elif not s[right].isalnum():
+                right -= 1
+                continue
+            # now it must be pointing at an alpha numeric character.
+            if s[left].lower() != s[right].lower():
                 return False
             left += 1
             right -= 1
@@ -18,8 +19,7 @@ class Solution:
 
 
 """
-s = "A ma"
-phrase = ama
-left = 1
-right = 1
+s = "?a.a/"
+left = 2
+right = 2
 """
