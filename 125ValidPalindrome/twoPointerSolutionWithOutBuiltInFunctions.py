@@ -2,19 +2,20 @@ class Solution:
     def isPalindrome(self, s: str) -> bool:
         def isAlNumeric(char: str):
             asciiChar = ord(char)
-            if asciiChar in range(48, 58):
+            if ord('0') <= asciiChar <= ord('9'):
                 return True
-            elif asciiChar in range(65, 91):
+            elif ord('A') <= asciiChar <= ord('Z'):
                 return True
-            elif asciiChar in range(97, 123):
+            elif ord('a') <= asciiChar <= ord('z'):
                 return True
             else:
                 return False
 
         def lowerChar(char):
             asciiChar = ord(char)
-            if asciiChar in range(65, 91):
-                return chr(asciiChar + 32)
+            differenceFromUpperToLowerCase = ord('a') - ord('A')
+            if ord('A') <= asciiChar <= ord('Z'):
+                return chr(asciiChar + differenceFromUpperToLowerCase)
             else:
                 return char
 
