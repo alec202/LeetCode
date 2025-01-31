@@ -3,9 +3,11 @@ class Solution:
         if len(nums) == 3:
             return [nums] if sum(nums) == 0 else []
         # list is bigger than 3 items
-        sumsFound = set()
+        sumsFound = []
         nums.sort()
         for i in range(0, len(nums)):
+            if i > 0 and nums[i-1] == nums[i]:
+                continue
             l = i + 1
             r = len(nums) - 1
             prevl = ''
@@ -19,7 +21,7 @@ class Solution:
                     continue
                 numsSum = nums[i] + nums[l] + nums[r]
                 if numsSum == 0:
-                    sumsFound.add((nums[i], nums[l], nums[r]))
+                    sumsFound.append([nums[i], nums[l], nums[r]])
                     prevl = nums[l]
                     prevr = nums[r]
                     l += 1
@@ -30,7 +32,7 @@ class Solution:
                 elif numsSum < 0:
                     prevl = nums[l]
                     l += 1
-        return [list(sol) for sol in sumsFound]
+        return sumsFound
 
 """
 nums = [-1,0,1,2,-1,-4]
