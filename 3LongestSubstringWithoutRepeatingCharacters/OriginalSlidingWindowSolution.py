@@ -1,34 +1,37 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        longest_sub = 0
-        sub = {}
-        l, r = 0, 0
-        for i, char in enumerate(s):
-            r = i
-            if char in sub:
-                sub_len = r - l
-                if sub_len > longest_sub:
-                    longest_sub = sub_len
-                new_l = sub[char] + 1
-                for j in range(l, sub[char]):
-                    del sub[s[j]]
-                sub[char] = i
-                l = new_l
+        ls = 0
+        left = 0
+        right = 1
+        if len(s) < 2:
+            return max(ls, len(s))
+        seen = {s[0]: 0}
+        ls = 1
+        while right < len(s):
+            new_c = s[right]
+            if new_c in seen:
+                old_left = left
+                last_seen_c = seen[new_c]
+                for i in range(old_left, last_seen_c + 1):
+                    seen.pop(s[i], "")
+                    if new_c not in seen:
+                        left = last_seen_c + 1
+                        seen[new_c] = right
+                        break
             else:
-                sub[char] = i
+                seen[new_c] = right
+                ls = max(ls, len(seen))
+            right += 1
+        return ls
 
-        if len(sub) > longest_sub:
-            return len(sub)
-        else:
-            return longest_sub
 """
-s = "abcabcbb"
-longest_sub = 3
-sub = {a: 3, b:4, c:5, }
-char = b
-i = 6
-l = 1
-r = 6
-new_l = 1
-sub_len = 3
+advdf
+seen = {v: 2, d: 3, f:4}
+ls = 3
+left = 2
+right = 5
+new_c = f
+old_left = 0
+last_seen_c = 1
+i = 1
 """
