@@ -2,22 +2,22 @@
 #  https://neetcode.io/solutions/longest-substring-without-repeating-characters
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        sub = {}
-        longest = 0
+        ls = 0
         l = 0
+        seen = {}
+        for r in range(len(s)):
+            newc = s[r]
+            if newc in seen:
+                l = max(l, seen[newc] + 1)
+            seen[newc] = r
+            ls = max(ls, r - l + 1)
+        return ls
 
-        for r, char in enumerate(s):
-            if char in sub:
-                l = max(sub[char] + 1, l)
-            sub[char] = r
-            longest = max(longest, (r - l + 1))
-        return longest
-
-"""
-s = "abbacabcbb"
-longest = 2
+""" s = zxbxzf
+ls = 3
+seen = {z: 4, x: 3, b: 2}
 l = 2
-r = 3
-char = a
-sub = {a: 3, b: 2,}
+r = 4
+newc = z
+
 """
