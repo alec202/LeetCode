@@ -11,3 +11,16 @@ class Solution:
                 l += 1
             ls = max(ls, r - l + 1)
         return ls
+
+"""
+s = AVAf
+k = 1
+l = 1
+ls = 3
+seen {a: 1, v: 1, f: 1}
+r = 3
+c = f
+freq_c = a
+substring_size = 4
+num_swaps = 2
+"""
