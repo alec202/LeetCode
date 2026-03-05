@@ -13,21 +13,21 @@ class Solution:
                 return l
             elif nums[r] == target:
                 return r
-            elif r - l + 1 <= 3:
-                return -1
+            # elif r - l + 1 <= 3:
+            #     return -1
             elif nums[l] == nums[r]:
                 return l if nums[l] == target else -1
-            elif nums[r] > nums[l]:
+            elif nums[r] >= nums[l]:
                 if target < midNum:
                     r = mid - 1
                 else:
                     l = mid + 1
-            elif midNum > nums[l]: #left half sorted
+            elif midNum >= nums[l]: #left half sorted
                 if nums[l] <= target < midNum:
                     r = mid - 1
                 else:
                     l = mid + 1
-            elif nums[r] > midNum: # right half sorted
+            elif nums[r] >= midNum: # right half sorted
                 if midNum < target <= nums[r]:
                     l = mid + 1
                 else:
@@ -36,6 +36,6 @@ class Solution:
 
 x = Solution()
 nums = [4,5,6,7,0,1,2]
-target = 0
+target = 3
 res = x.search(nums, target)
 print(res)
